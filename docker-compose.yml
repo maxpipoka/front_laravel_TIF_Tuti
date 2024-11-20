@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    volumes:
+      - .:/var/www/html
+      - ./docker/app/php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - "8000:8000" # Puerto expuesto para Artisan serve
+    environment:
+      DB_CONNECTION: pgsql
+      DB_HOST: <URL-de-tu-SaaS>
+      DB_PORT: 5432
+      DB_DATABASE: <tu-database>
+      DB_USERNAME: <tu-usuario>
+      DB_PASSWORD: <tu-password>
+    working_dir: /var/www/html
